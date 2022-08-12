@@ -1,0 +1,249 @@
+:root {
+  --filling-color: rgb(227, 227, 227);
+  --radius: 15px;
+  --columns: 4;
+  --text-color: black;
+  --con-bg-color: rgba(255, 255, 255, 0.5);
+  --projects-bg-color: white;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Helvetica, sans-serif;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--text-color);
+  border-radius: 999px;
+}
+::selection {
+  color: var(--text-color);
+  background-color: #00FFFF;
+}
+
+
+
+
+.con {
+  background-color: var(--con-bg-color);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius);
+  padding: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+button.icon {
+  outline: unset;
+  border: unset;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button.icon:hover {
+  cursor: pointer;
+}
+
+img.bgImage {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.PHP-Exception {
+  position: fixed;
+  z-index: 102;
+  top: 100px;
+  left: 50px;
+  width: calc(100vw - 100px);
+  max-height: calc(100vh - 150px);
+  overflow: auto;
+  display: none;
+}
+.PHP-Exception.throw {
+  display: block;
+}
+.PHP-Exception h5 {
+  color: var(--text-color);
+}
+
+
+
+
+
+
+header {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+
+  z-index: 100;
+  border-radius: unset !important;
+  padding: unset !important;
+  border-top: unset !important;
+  border-left: unset !important;
+  border-right: unset !important;
+}
+
+header > * {
+  margin: 10px;
+}
+
+
+button#options > img {
+  width: 16px;
+  height: 16px;
+}
+
+
+
+
+
+
+.main {
+  height: calc(100% - 40px);
+  width: 100%;
+  position: relative;
+  top: 40px;
+  overflow: auto;
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(0, 150px);
+  grid-auto-rows: 150px;
+  width: 0px;
+  height: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  transition: height 500ms ease-in-out, width 500ms ease-in-out;
+}
+.projects .project {
+  position: relative;
+  width: calc(150px - 10px);
+  height: calc(150px - 10px);
+  margin: 5px;
+  background-color: var(--projects-bg-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0);
+  transition: transform 500ms ease-in-out, opacity 500ms;
+}
+.projects .project.show {
+  opacity: 1;
+  transform: scale(1);
+  transition: transform 500ms ease-in-out, opacity 500ms;
+}
+.projects .project.add {
+  background-color: transparent;
+}
+.projects .project:hover {
+  cursor: pointer;
+}
+.projects .project.add h5 {
+  font-size: 1.7em;
+}
+.projects .project h5 {
+  z-index: 5;
+}
+.projects .project .filling {
+  background-color: var(--filling-color);
+  height: 16px;
+  position: absolute;
+  bottom: 0px;
+  width: 0%;
+  left: 0px;
+  overflow: visible;
+}
+.projects .project .filling .percentage {
+  /*todo think about different placement, for no hidden */
+  display: none;
+  font-size: 0.6em;
+  position: absolute;
+  bottom: 100%;
+  left: 2px;
+}
+
+
+
+.projects-manipulation {
+  position: fixed;
+  z-index: 101;
+  width: 250px;
+  top: 0px;
+  left: 0px;
+  display: none;
+
+  transition: top 250ms ease-in-out, left 250ms ease-in-out;
+}
+.projects-manipulation.show {
+  display: block;
+}
+.projects-manipulation.add button.delete {
+  display: none;
+}
+.projects-manipulation input {
+  width: 100%;
+  outline: unset;
+  border: 1px solid var(--filling-color);
+  margin-bottom: 8px;
+}
+.projects-manipulation .controls {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.projects-manipulation .controls button {
+  margin-left: 4px;
+  border: 1px solid var(--filling-color);
+  background-color: var(--projects-bg-color);
+  padding: 2px 4px;
+  border-radius: 5px;
+}
+.projects-manipulation .controls button:hover {
+  cursor: pointer;
+  color: white;
+}
+.projects-manipulation .controls button.cancel:hover {
+  background-color: dodgerblue;
+}
+.projects-manipulation .controls button.submit:hover {
+  background-color: rgb(20, 147, 37);
+}
+.projects-manipulation .controls button.delete:hover {
+  background-color: crimson;
+}
